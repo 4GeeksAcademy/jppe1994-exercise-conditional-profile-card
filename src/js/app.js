@@ -26,22 +26,52 @@ function render(variables = {}) {
   console.log("These are the current variables: ", variables); // print on the console
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
+  const defaultName = "Your Name";
+  const defaultLastName = "Your Last Name";
+  const defaultRole = "Your Role";
+  const defaultCity = "Your City";
+  const defaultCountry = "Your Country";
+  const defaultTwitter = " ";
+  const defaultGithub = " ";
+  const defaultLinkedin = " ";
+  const defaultInstagram = " ";
+
+  variables.name = variables.name == null ? defaultName : variables.name;
+  variables.lastName =
+    variables.lastName == null ? defaultLastName : variables.lastName;
+  variables.role = variables.role == null ? defaultRole : variables.role;
+
+  variables.city = variables.city == null ? defaultCity : variables.city;
+  variables.country =
+    variables.country == null ? defaultCountry : variables.country;
+  variables.twitter =
+    variables.twitter == null ? defaultTwitter : variables.twitter;
+  variables.instagram =
+    variables.instagram == null ? defaultInstagram : variables.instagram;
+  variables.github =
+    variables.github == null ? defaultGithub : variables.github;
+  variables.linkedin =
+    variables.linkedin == null ? defaultLinkedin : variables.linkedin;
+
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
-  document.querySelector("#widget_content").innerHTML = `<div class="widget">
+  document.querySelector("#widget_content").innerHTML = `<div class="widget" >
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${variables.name}, ${variables.lastName}</h1>
+          <h2>${variables.role}</h2>
+          <h3>${variables.city}, ${variables.country}</h3>
+          <ul class=${variables.socialMediaPosition}>
+            <li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/school/${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
           </ul>
+          
+
+          
         </div>
     `;
 }
